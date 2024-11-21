@@ -24,26 +24,16 @@ body {
 .layer-1 {
   transform: translateZ(1px) scale(1.2); /* Appears closer */
   filter: blur(0.2px);
+  z-index: 3;
 }
 
 .layer-2 {
   transform: translateZ(0.5px) scale(1.1); /* Mid-layer */
   filter: blur(0.2px);
-}
-
-.layer-3 {
-  transform: translateZ(0px) scale(1); /* Background */
-}
-
-/* Ensure layers stack in order */
-.layer-1 {
-  z-index: 3;
-}
-
-.layer-2 {
   z-index: 2;
 }
 
 .layer-3 {
+  transform: translateZ(0px) scale(1); /* Background */
   z-index: 1;
 }

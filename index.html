@@ -18,30 +18,33 @@
 
     .layer {
       position: fixed; /* Fixed position so they stay on the screen */
-      top: 0;
-      left: 0;
+      top: 50%;
+      left: 50%;
+      transform-origin: center center; /* Ensures scaling happens from the center */
       width: 100%;
       height: 100vh; /* Each layer spans the full viewport height */
       background-size: cover;
       background-position: center;
       will-change: transform, filter;
+      pointer-events: none; /* Prevent interaction with the layers */
+      z-index: 1;
     }
 
     .layer-1 {
       z-index: 3;
-      transform: translateZ(1px) scale(1.2); /* Appears closer */
+      transform: translate(-50%, -50%) scale(1.2); /* Appears closer */
       filter: blur(0.2px);
     }
 
     .layer-2 {
       z-index: 2;
-      transform: translateZ(0.5px) scale(0.95); /* Smaller and slower */
+      transform: translate(-50%, -50%) scale(0.9); /* Smaller and slower zoom */
       filter: blur(0.2px);
     }
 
     .layer-3 {
       z-index: 1;
-      transform: translateZ(0px) scale(1); /* Background */
+      transform: translate(-50%, -50%) scale(1); /* Background */
     }
   </style>
 </head>
@@ -57,15 +60,15 @@
       const scrollPosition = window.scrollY;
 
       // Parallax effect for the first layer (normal zoom)
-      document.querySelector(".layer-1").style.transform = `translateY(${scrollPosition * 0.5}px) scale(${1.1 + scrollPosition * 0.0003})`;
+      document.querySelector(".layer-1").style.transform = `translate(-50%, -50%) scale(${1.1 + scrollPosition * 0.0003})`;
       document.querySelector(".layer-1").style.filter = `blur(${0.2 + scrollPosition * 0.002}px)`;
 
       // Parallax effect for the second layer (slower and smaller zoom)
-      document.querySelector(".layer-2").style.transform = `translateY(${scrollPosition * 0.3}px) scale(${0.95 + scrollPosition * 0.0002})`; // Smaller zoom
+      document.querySelector(".layer-2").style.transform = `translate(-50%, -50%) scale(${0.9 + scrollPosition * 0.00015})`; // Smaller zoom, slower
       document.querySelector(".layer-2").style.filter = `blur(${Math.max(0, 0.2 - scrollPosition * 0.0015)}px)`; // Reduces blur as you scroll
 
       // Parallax effect for the third layer (background)
-      document.querySelector(".layer-3").style.transform = `translateY(${scrollPosition * 0.1}px) scale(${1 + scrollPosition * 0.0002})`;
+      document.querySelector(".layer-3").style.transform = `translate(-50%, -50%) scale(${1 + scrollPosition * 0.0002})`;
     });
   </script>
 </body>
